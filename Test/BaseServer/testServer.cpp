@@ -38,24 +38,7 @@ void ClientRecvThread(SOCKET _Socket)
 
 }
 
-void ServerRecvThread(SOCKET _Sock)
-{
-	// 이름 받는거
-	std::string Arr;
-	Arr.resize(100);
 
-	while (true)
-	{
-		int RecvSize = recv(_Sock, &Arr[0], Arr.size(), 0);
-		std::string Name = Arr;
-
-		std::cout << Arr << std::endl;
-
-		Arr.clear();
-		Arr.resize(100);
-
-	}
-}
 
 int main()
 {
