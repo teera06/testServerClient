@@ -106,13 +106,12 @@ int main()
 
 	while (true)
 	{
-		//Buffer.clear();
-		//Buffer.resize(100);
+		
 
 		std::cin >> Buffer;
 		send(ClientSocket, &Buffer[0], Buffer.size(), 0);
 
-		//Buffer.clear();
+		Buffer.clear();
 		Buffer.resize(100);
 	}
 

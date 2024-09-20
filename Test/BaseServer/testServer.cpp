@@ -1,5 +1,6 @@
 #include <WS2tcpip.h> //서버용 Window보다 무조건 위에 있어야 한다.
 #include <WinSock2.h> //서버용
+
 #include <string>
 #include <iostream>
 #include <vector>
@@ -108,7 +109,6 @@ int main()
 	//
 
 
-	int AddressLen = sizeof(SOCKADDR_IN);
 
 	std::cout << "접속 시작\n";
 
@@ -116,6 +116,7 @@ int main()
 	Buffer.resize(100);
 
 	
+	int AddressLen = sizeof(SOCKADDR_IN);
 
 	SOCKADDR_IN ClientAdd;
 
@@ -131,18 +132,19 @@ int main()
 	std::cin >> Buffer;
 
 	int SendSize = send(ClientSocket, &Buffer[0], Buffer.size(), 0);
+
+
 	std::thread RecvThread = std::thread(std::bind(ClientRecvThread, ClientSocket));
 
 	while (true)
 	{
-		Buffer.clear();
-		//Buffer.resize(100);
+		
 
 		std::cin >> Buffer;
 		send(ClientSocket, &Buffer[0], Buffer.size(), 0);
 
 		Buffer.clear();
-		//Buffer.resize(100);
+		Buffer.resize(100);
 	}
 	// Windows 소켓 구현의 사용을 종료하는 함수 호출입니다.
 	// 이 함수는 Windows 소켓 구현에 의해 할당된 모든 리소스를 해제하며 리소스가 제대로 해제되도록 프로그램이 종료되기 전에 호출되어야 합니다.
